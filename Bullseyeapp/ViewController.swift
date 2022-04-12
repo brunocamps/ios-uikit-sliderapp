@@ -37,11 +37,14 @@ class ViewController: UIViewController {
 //            difference = 0
 //        }
         
-        var difference = currentValue - targetValue
-        if difference < 0 {
-            difference = difference * -1
-        }
+//        var difference = currentValue - targetValue
+//        if difference < 0 {
+//            difference = difference * -1
+//        }
         
+        // OR
+        
+        let difference = abs(targetValue - currentValue)
         
         let message = "The value of the slider is: \(currentValue)" +
         "\nThe target value is: \(String(describing: targetValue))" +
