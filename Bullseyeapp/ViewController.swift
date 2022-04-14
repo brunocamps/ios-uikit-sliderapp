@@ -9,47 +9,34 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var currentValue: Int = 50
+    var currentValue = 0
     
     var targetValue = 0
     
+    var score = 0
+    var round = 0
+    
+    @IBOutlet var scoreLabel: UILabel!
     
     @IBOutlet var slider: UISlider!
 
-
+    @IBOutlet var roundLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        currentValue = lroundf(slider.value)
-//        targetValue = Int.random(in: 1...100)
         
         startNewRound()
     }
     
     @IBAction func showAlert() {
-        
-        //var difference: Int
-        
-//        if currentValue > targetValue {
-//            difference = currentValue - targetValue
-//        } else if targetValue > currentValue {
-//            difference = targetValue - currentValue
-//        } else {
-//            difference = 0
-//        }
-        
-//        var difference = currentValue - targetValue
-//        if difference < 0 {
-//            difference = difference * -1
-//        }
-        
-        // OR
+
         
         let difference = abs(targetValue - currentValue)
+        let points = 100 - difference
         
-        let message = "The value of the slider is: \(currentValue)" +
-        "\nThe target value is: \(String(describing: targetValue))" +
-        "\nThe difference is: \(difference)"
+        score += points
 
+        let message = "You scored \(points) points"
         let alert = UIAlertController(
           title: "Hello, World",
           message: message,    // changed
@@ -68,7 +55,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func sliderMoved(_ slider: UISlider) {
-        // print("The value of the slider is now: \(slider.value)")
         currentValue = lroundf(slider.value)
     }
     
@@ -76,6 +62,7 @@ class ViewController: UIViewController {
 
     
     func startNewRound() {
+      round += 1
       targetValue = Int.random(in: 1...100)
       currentValue = 50
       slider.value = Float(currentValue)
@@ -84,6 +71,9 @@ class ViewController: UIViewController {
     
     func updateLabels() {
       targetLabel.text = String(targetValue)
+      scoreLabel.text = String(score)
+      roundLabel.text = String(round)
+        
     }
 }
 
