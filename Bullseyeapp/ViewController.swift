@@ -32,13 +32,30 @@ class ViewController: UIViewController {
 
         
         let difference = abs(targetValue - currentValue)
-        let points = 100 - difference
+        var points = 100 - difference
         
+        
+        // establish alert title
+        let title: String
+        
+        if difference == 0 {
+            title = "Perfect!"
+            points += 100
+        } else if difference < 5 {
+            title = "You almost had it!"
+            if difference == 1 {
+                points += 50
+            }
+        } else if difference < 10 {
+            title = "Pretty good!"
+        } else {
+            title = "Not even close..."
+        }
         score += points
 
         let message = "You scored \(points) points"
         let alert = UIAlertController(
-          title: "Hello, World",
+          title: title,
           message: message,    // changed
           preferredStyle: .alert)
 
@@ -72,7 +89,7 @@ class ViewController: UIViewController {
     func updateLabels() {
       targetLabel.text = String(targetValue)
       scoreLabel.text = String(score)
-      roundLabel.text = String(round)
+        roundLabel.text = String(round)
         
     }
 }
